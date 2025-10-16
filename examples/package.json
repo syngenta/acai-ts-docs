@@ -1,0 +1,24 @@
+{
+  "name": "acai-ts-examples",
+  "version": "1.0.0",
+  "description": "Examples for acai-ts library",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "example:01": "ts-node 01-basic-router/handler.ts",
+    "example:02": "ts-node 02-decorators/handler.ts",
+    "example:03": "ts-node 03-validation/handler.ts",
+    "example:04": "ts-node 04-dynamodb/handler.ts",
+    "example:05": "ts-node 05-s3/handler.ts"
+  },
+  "dependencies": {
+    "acai-ts": "file:..",
+    "@types/aws-lambda": "^8.10.145"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

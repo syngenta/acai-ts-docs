@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "3.11"
+
+[packages]
+mkdocs = "==1.5.3"
+mkdocs-material = "*"
+
+[scripts]
+serve = "mkdocs serve"
+build = "mkdocs build"

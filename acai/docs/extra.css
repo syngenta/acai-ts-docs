@@ -1,0 +1,26 @@
+[data-md-color-scheme="acai"] {
+    --md-primary-fg-color: black;
+}
+.md-copyright,.md-footer {
+    display: none;
+}
+.md-header__button.md-logo :-webkit-any(img, svg) {
+    background: black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+    height: 60px;
+    width: 60px;
+}
+.md-typeset a {
+    color: #800080;
+}
+.md-nav__link:is(:focus, :hover) {
+    color: #800080;
+}
+.md-typeset a:focus,.md-typeset a:hover {
+    color: #c5de0c;
+}
+.md-nav__item .md-nav__link--active {
+    color: #800080;
+}
