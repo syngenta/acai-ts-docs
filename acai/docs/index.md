@@ -23,19 +23,27 @@ Happy Path Programming is an idea in which inputs are all validated before opera
 
 ```typescript
 import 'reflect-metadata';
-import { Router, Endpoint, Route, Validate, Response, Request } from 'acai-ts';
+import { Router, Route, Validate, Response, Request } from 'acai-ts';
 
 @Route('POST', '/users')
-@Validate('CreateUserSchema')
-export class CreateUserEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+@Validate({
+  body: {
+    type: 'object',
+    required: ['name', 'email'],
+    properties: {
+      name: { type: 'string' },
+      email: { type: 'string', format: 'email' }
+    }
+  }
+})
+export class CreateUserEndpoint {
+  async handler(request: Request, response: Response): Promise<void> {
     // Body is already validated - focus on business logic!
-    response.body = {
+    response.setBody({
       id: '123',
       email: request.body.email,
       name: request.body.name
-    };
-    return response;
+    });
   }
 }
 ```

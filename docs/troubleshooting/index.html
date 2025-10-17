@@ -1,0 +1,2522 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Common issues and solutions for acai-ts">
+      
+      
+        <meta name="author" content="Paul Cruse III">
+      
+      
+        <link rel="canonical" href="https://syngenta.github.io/acai-ts-docs/troubleshooting/">
+      
+      
+        <link rel="prev" href="../common/logger/">
+      
+      
+        <link rel="next" href="../changes/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Troubleshooting - acai-ts</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="acai" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#troubleshooting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="acai-ts" class="md-header__button md-logo" aria-label="acai-ts" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/syngenta/acai-ts-docs/main/logos/logo-icon-docs.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            acai-ts
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="acai" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="acai-ts" class="md-nav__button md-logo" aria-label="acai-ts" data-md-component="logo">
+      
+  <img src="https://raw.githubusercontent.com/syngenta/acai-ts-docs/main/logos/logo-icon-docs.png" alt="logo">
+
+    </a>
+    acai-ts
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Demo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../decorators/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Decorators
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Decorators
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Event Handlers
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Event Handlers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../apigateway/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    APIGateway
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            APIGateway
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_2" id="__nav_5_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Router
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Router
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/router/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set Up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/router/configurations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_3" id="__nav_5_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Endpoint
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Endpoint
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/endpoint/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set Up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/endpoint/configurations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Request
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apigateway/response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../dynamodb/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    DynamoDB
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            DynamoDB
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamodb/configurations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamodb/record/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Record
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../s3/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    S3
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            S3
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../s3/configurations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../s3/record/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Record
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../sqs/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    SQS
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            SQS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sqs/configurations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sqs/record/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Record
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common/logger/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Logger
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#route-resolution-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Route Resolution Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Route Resolution Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routepath-differences-between-development-and-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      routePath Differences Between Development and Build
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="routePath Differences Between Development and Build">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-use-absolute-paths-in-router-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Use Absolute Paths in Router Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verify-build-output-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Verify Build Output Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-use-explicit-route-lists-for-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Use Explicit Route Lists for Production
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-environment-specific-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Environment-Specific Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-debug-route-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Debug Route Discovery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decorator-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorator Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decorator Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflect-metadata-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflect Metadata Not Found
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typescript-configuration-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript Configuration Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decorator-order-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorator Order Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-not-found-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method Not Found Errors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Method Not Found Errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-method-name-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Method Name Mismatch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-missing-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Missing Export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-router-not-recognizing-decorated-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Router Not Recognizing Decorated Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-validation-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Validation Failures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openapi-validation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAPI Validation Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slow-route-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slow Route Resolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-issues-with-large-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Issues with Large Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auth-not-blocking-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      @Auth Not Blocking Requests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-and-deployment-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build and Deployment Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build and Deployment Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routes-not-found-after-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Routes Not Found After Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeout-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeout Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migration from acai-js
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.npmjs.com/package/acai-ts" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NPM Registry
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/syngenta/acai-ts" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Github Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/syngenta/acai-ts/issues" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#route-resolution-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Route Resolution Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Route Resolution Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routepath-differences-between-development-and-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      routePath Differences Between Development and Build
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="routePath Differences Between Development and Build">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-use-absolute-paths-in-router-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Use Absolute Paths in Router Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verify-build-output-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Verify Build Output Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-use-explicit-route-lists-for-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Use Explicit Route Lists for Production
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-environment-specific-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Environment-Specific Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-debug-route-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Debug Route Discovery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decorator-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorator Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decorator Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflect-metadata-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reflect Metadata Not Found
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typescript-configuration-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript Configuration Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decorator-order-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorator Order Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-not-found-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method Not Found Errors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Method Not Found Errors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-method-name-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Method Name Mismatch
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-missing-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Missing Export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-router-not-recognizing-decorated-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Router Not Recognizing Decorated Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-validation-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Validation Failures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openapi-validation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenAPI Validation Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slow-route-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slow Route Resolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-issues-with-large-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Issues with Large Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auth-not-blocking-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      @Auth Not Blocking Requests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-and-deployment-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build and Deployment Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build and Deployment Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routes-not-found-after-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Routes Not Found After Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timeout-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timeout Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<p>This guide covers common issues you may encounter when using acai-ts and their solutions.</p>
+<h2 id="route-resolution-issues">Route Resolution Issues<a class="headerlink" href="#route-resolution-issues" title="Permanent link">&para;</a></h2>
+<h3 id="routepath-differences-between-development-and-build">routePath Differences Between Development and Build<a class="headerlink" href="#routepath-differences-between-development-and-build" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Routes work in development but fail in production builds, or vice versa.</p>
+<p><strong>Symptoms:</strong>
+- Routes return 404 errors in production
+- Path parameters are not correctly parsed
+- Route matching behaves differently between local development and deployed environments</p>
+<p><strong>Causes:</strong>
+- File path resolution differences between development and compiled code
+- TypeScript compilation changing file structure
+- Serverless packaging affecting route discovery</p>
+<p><strong>Solutions:</strong></p>
+<h4 id="1-use-absolute-paths-in-router-configuration">1. Use Absolute Paths in Router Configuration<a class="headerlink" href="#1-use-absolute-paths-in-router-configuration" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ❌ Problematic - relative paths</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;directory&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;./api/handlers&#39;</span>
+<span class="p">});</span>
+
+<span class="c1">// ✅ Better - absolute paths from project root</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;directory&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="kt">path.join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;../api/handlers&#39;</span><span class="p">)</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="2-verify-build-output-structure">2. Verify Build Output Structure<a class="headerlink" href="#2-verify-build-output-structure" title="Permanent link">&para;</a></h4>
+<p>Check that your build process preserves the expected file structure:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Check your dist/build directory structure</span>
+find<span class="w"> </span>dist<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.js&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+
+<span class="c1"># Ensure route files are in expected locations</span>
+ls<span class="w"> </span>-la<span class="w"> </span>dist/api/handlers/
+</code></pre></div></td></tr></table></div>
+<h4 id="3-use-explicit-route-lists-for-production">3. Use Explicit Route Lists for Production<a class="headerlink" href="#3-use-explicit-route-lists-for-production" title="Permanent link">&para;</a></h4>
+<p>For maximum reliability in production:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;list&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dist/api/handlers/users.js&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dist/api/handlers/users.js&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/users/:id&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;dist/api/handlers/users/[id].js&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="4-environment-specific-configuration">4. Environment-Specific Configuration<a class="headerlink" href="#4-environment-specific-configuration" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">isDevelopment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;development&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;directory&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="kt">isDevelopment</span><span class="w"> </span>
+<span class="w">    </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;src/api/handlers&#39;</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;api/handlers&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">basePath</span><span class="o">:</span><span class="w"> </span><span class="kt">isDevelopment</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/api/v1&#39;</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="5-debug-route-discovery">5. Debug Route Discovery<a class="headerlink" href="#5-debug-route-discovery" title="Permanent link">&para;</a></h4>
+<p>Enable logging to see which routes are being discovered:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;api/**/*.js&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">outputError</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// Enable error output</span>
+<span class="w">  </span><span class="nx">globalLogger</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="c1">// Enable detailed logging</span>
+<span class="p">});</span>
+
+<span class="c1">// Add custom logging</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">autoLoad</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Discovered routes:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">getRoutes</span><span class="o">?</span><span class="p">.());</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="decorator-issues">Decorator Issues<a class="headerlink" href="#decorator-issues" title="Permanent link">&para;</a></h2>
+<h3 id="reflect-metadata-not-found">Reflect Metadata Not Found<a class="headerlink" href="#reflect-metadata-not-found" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> <code>Cannot read property 'getMetadata' of undefined</code> or similar metadata errors.</p>
+<p><strong>Solution:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ✅ Must be imported FIRST, before any decorators</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;reflect-metadata&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Route</span><span class="p">,</span><span class="w"> </span><span class="nx">Validate</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;acai-ts&#39;</span><span class="p">;</span>
+
+<span class="c1">// Rest of your code...</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="typescript-configuration-issues">TypeScript Configuration Issues<a class="headerlink" href="#typescript-configuration-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Decorators not working or compiler errors.</p>
+<p><strong>Solution:</strong> Ensure your <code>tsconfig.json</code> has the correct settings:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;compilerOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;experimentalDecorators&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;emitDecoratorMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES2020&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;commonjs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;moduleResolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;esModuleInterop&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;allowSyntheticDefaultImports&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;strict&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="decorator-order-issues">Decorator Order Issues<a class="headerlink" href="#decorator-order-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Middleware not executing in expected order.</p>
+<p><strong>Solution:</strong> Understand the execution order:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">UserController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Execution order:</span>
+<span class="w">  </span><span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">)</span><span class="w">    </span><span class="c1">// 1. Route definition</span>
+<span class="w">  </span><span class="kd">@Auth</span><span class="p">(</span><span class="nx">authFunction</span><span class="p">)</span><span class="w">         </span><span class="c1">// 2. Authentication (executed first)</span>
+<span class="w">  </span><span class="kd">@Validate</span><span class="p">(</span><span class="nx">schema</span><span class="p">)</span><span class="w">           </span><span class="c1">// 3. Validation (executed second)</span>
+<span class="w">  </span><span class="kd">@Before</span><span class="p">(</span><span class="nx">beforeMiddleware</span><span class="p">)</span><span class="w">   </span><span class="c1">// 4. Before middleware (executed third)</span>
+<span class="w">  </span><span class="kd">@After</span><span class="p">(</span><span class="nx">afterMiddleware</span><span class="p">)</span><span class="w">     </span><span class="c1">// 6. After middleware (executed after handler)</span>
+<span class="w">  </span><span class="kd">@Timeout</span><span class="p">(</span><span class="mf">5000</span><span class="p">)</span><span class="w">              </span><span class="c1">// Applied throughout entire request</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">createUser</span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span><span class="w">     </span><span class="c1">// 5. Handler function</span>
+<span class="w">    </span><span class="c1">// Your code here</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="method-not-found-errors">Method Not Found Errors<a class="headerlink" href="#method-not-found-errors" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> <code>Method not found</code> or handler not being called.</p>
+<p><strong>Common Causes &amp; Solutions:</strong></p>
+<h4 id="1-method-name-mismatch">1. Method Name Mismatch<a class="headerlink" href="#1-method-name-mismatch" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ❌ Wrong - method name doesn&#39;t match decorator</span>
+<span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">async</span><span class="w"> </span><span class="nx">getUser</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// Method name suggests GET but decorator says POST</span>
+
+<span class="c1">// ✅ Correct - clear method names</span>
+<span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">async</span><span class="w"> </span><span class="nx">createUser</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users/:id&#39;</span><span class="p">)</span>
+<span class="k">async</span><span class="w"> </span><span class="nx">getUser</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="2-missing-export">2. Missing Export<a class="headerlink" href="#2-missing-export" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ❌ Wrong - not exported</span>
+<span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">async</span><span class="w"> </span><span class="nx">getUsers</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="c1">// ✅ Correct - properly exported</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">UserController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">getUsers</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="3-router-not-recognizing-decorated-routes">3. Router Not Recognizing Decorated Routes<a class="headerlink" href="#3-router-not-recognizing-decorated-routes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Make sure your router is configured correctly for decorators</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;list&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="c1">// Empty array - routes come from decorators</span>
+<span class="w">  </span><span class="c1">// ... other config</span>
+<span class="p">});</span>
+
+<span class="c1">// And that you&#39;re importing decorated classes somewhere</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;./controllers/UserController&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// This registers the decorated routes</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="validation-issues">Validation Issues<a class="headerlink" href="#validation-issues" title="Permanent link">&para;</a></h2>
+<h3 id="schema-validation-failures">Schema Validation Failures<a class="headerlink" href="#schema-validation-failures" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Valid requests are being rejected or invalid requests are passing.</p>
+<p><strong>Debug Steps:</strong></p>
+<ol>
+<li>
+<p><strong>Check Schema Syntax:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ✅ Correct JSON Schema</span>
+<span class="kd">@Validate</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;object&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;email&#39;</span><span class="p">],</span>
+<span class="w">    </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">minLength</span><span class="o">:</span><span class="w"> </span><span class="kt">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">format</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;email&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// ❌ Common mistake - wrong schema structure</span>
+<span class="kd">@Validate</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;string&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// Missing &#39;body&#39; wrapper</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;string&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Enable Validation Logging:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="c1">// ... other config</span>
+<span class="w">  </span><span class="nx">outputError</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// Show detailed validation errors</span>
+<span class="w">  </span><span class="nx">validateResponse</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="w"> </span><span class="c1">// Also validate responses</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Test Schema Separately:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Validator</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;acai-ts&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">validator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Validator</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* your schema */</span><span class="w"> </span><span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* your test data */</span><span class="w"> </span><span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">validator</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">schema</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Validation result:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h3 id="openapi-validation-issues">OpenAPI Validation Issues<a class="headerlink" href="#openapi-validation-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Router with <code>autoValidate: true</code> not working correctly.</p>
+<p><strong>Solution:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;directory&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;api/handlers&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">autoValidate</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">schemaPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;./openapi.yml&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">// Make sure this path is correct</span>
+<span class="w">  </span><span class="nx">validateResponse</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="w"> </span><span class="c1">// Set to true only if you have response schemas</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Verify your OpenAPI schema:
+- Paths match your route structure exactly
+- HTTP methods are correctly defined
+- Request/response schemas are valid JSON Schema</p>
+<h2 id="performance-issues">Performance Issues<a class="headerlink" href="#performance-issues" title="Permanent link">&para;</a></h2>
+<h3 id="slow-route-resolution">Slow Route Resolution<a class="headerlink" href="#slow-route-resolution" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> First request takes a long time or timeouts occur.</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>
+<p><strong>Use <code>autoLoad()</code> for Better Cold Start Performance:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;directory&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;api/handlers&#39;</span>
+<span class="p">});</span>
+
+<span class="c1">// Pre-load routes during Lambda initialization</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">autoLoad</span><span class="p">();</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Optimize File Discovery:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ✅ Specific patterns perform better</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;api/handlers/**/*.controller.js&#39;</span><span class="w"> </span><span class="c1">// Specific pattern</span>
+<span class="p">});</span>
+
+<span class="c1">// ❌ Avoid overly broad patterns</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;**/*.js&#39;</span><span class="w"> </span><span class="c1">// Too broad, scans entire project</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h3 id="memory-issues-with-large-applications">Memory Issues with Large Applications<a class="headerlink" href="#memory-issues-with-large-applications" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> High memory usage or out-of-memory errors.</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>
+<p><strong>Use Targeted Route Loading:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Instead of loading all routes, be selective</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;list&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="c1">// Only include routes you actually need</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;handlers/users.js&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Avoid Loading Heavy Dependencies in Route Files:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ❌ Heavy imports loaded for all routes</span>
+<span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;aws-sdk&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">heavyLibrary</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;heavy-library&#39;</span><span class="p">;</span>
+
+<span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">async</span><span class="w"> </span><span class="nx">getUsers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Simple handler that doesn&#39;t need heavy libraries</span>
+<span class="p">}</span>
+
+<span class="c1">// ✅ Lazy load heavy dependencies</span>
+<span class="kd">@Route</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/process-data&#39;</span><span class="p">)</span>
+<span class="k">async</span><span class="w"> </span><span class="nx">processData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">AWS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;aws-sdk&#39;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Lazy load when needed</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">processor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;./heavy-processor&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// Use as needed</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h2 id="authentication-issues">Authentication Issues<a class="headerlink" href="#authentication-issues" title="Permanent link">&para;</a></h2>
+<h3 id="auth-not-blocking-requests">@Auth Not Blocking Requests<a class="headerlink" href="#auth-not-blocking-requests" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Authentication decorator allows unauthorized requests through.</p>
+<p><strong>Common Causes:</strong></p>
+<ol>
+<li>
+<p><strong>Auth Function Not Returning Boolean:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ❌ Wrong - doesn&#39;t return boolean</span>
+<span class="kd">@Auth</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">validateUser</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// Missing return statement!</span>
+<span class="p">})</span>
+
+<span class="c1">// ✅ Correct - explicitly returns boolean</span>
+<span class="kd">@Auth</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">validateUser</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// Explicit boolean return</span>
+<span class="p">})</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Async Issues:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ❌ Wrong - not awaiting async operations</span>
+<span class="kd">@Auth</span><span class="p">((</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">validateUser</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns Promise, not boolean!</span>
+<span class="p">})</span>
+
+<span class="c1">// ✅ Correct - properly handling async</span>
+<span class="kd">@Auth</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">isValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">validateUser</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">isValid</span><span class="p">;</span>
+<span class="p">})</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Exception Handling:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ✅ Good practice - handle exceptions properly</span>
+<span class="kd">@Auth</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">validateUser</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Auth error:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"> </span><span class="c1">// Fail closed - deny access on error</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h2 id="build-and-deployment-issues">Build and Deployment Issues<a class="headerlink" href="#build-and-deployment-issues" title="Permanent link">&para;</a></h2>
+<h3 id="routes-not-found-after-deployment">Routes Not Found After Deployment<a class="headerlink" href="#routes-not-found-after-deployment" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Routes work locally but return 404 in deployed environment.</p>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li>
+<p><strong>Check Build Output:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Verify your build includes route files</span>
+npm<span class="w"> </span>run<span class="w"> </span>build
+find<span class="w"> </span>dist<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.js&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(route|handler|controller)&quot;</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Verify Serverless Configuration:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># serverless.yml</span>
+<span class="nt">functions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">handler</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dist/handler.route</span><span class="w">  </span><span class="c1"># Make sure path is correct</span>
+<span class="w">    </span><span class="nt">events</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">httpApi</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/{proxy+}</span>
+<span class="w">          </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">any</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Check File Extensions in Production:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Use correct file extensions for your build output</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">mode</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">routesPath</span><span class="o">:</span><span class="w"> </span><span class="kt">process.env.NODE_ENV</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;production&#39;</span>
+<span class="w">    </span><span class="o">?</span><span class="w"> </span><span class="s1">&#39;dist/**/*.js&#39;</span><span class="w">    </span><span class="c1">// Built files</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;src/**/*.ts&#39;</span><span class="w">     </span><span class="c1">// Source files</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h3 id="timeout-issues">Timeout Issues<a class="headerlink" href="#timeout-issues" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong> Functions timing out unexpectedly.</p>
+<p><strong>Debug Steps:</strong></p>
+<ol>
+<li>
+<p><strong>Check Timeout Configuration:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Function-level timeout</span>
+<span class="kd">@Timeout</span><span class="p">(</span><span class="mf">30000</span><span class="p">)</span><span class="w"> </span><span class="c1">// 30 seconds</span>
+
+<span class="c1">// Router-level default</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="kt">30000</span><span class="w"> </span><span class="c1">// 30 seconds default</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Add Logging to Identify Bottlenecks:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">@Before</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Request started:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">());</span>
+<span class="p">})</span>
+
+<span class="kd">@After</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Request completed:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">());</span>
+<span class="p">})</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h2 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h2>
+<p>If you continue to experience issues:</p>
+<ol>
+<li>
+<p><strong>Enable Debug Logging:</strong>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Router</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">globalLogger</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">outputError</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Check Examples:</strong> Review the <a href="https://github.com/syngenta/acai-ts-docs/tree/main/examples">working examples</a></p>
+</li>
+<li>
+<p><strong>Create Minimal Reproduction:</strong> Strip down to the simplest possible case that demonstrates the issue</p>
+</li>
+<li>
+<p><strong>Check Version Compatibility:</strong> Ensure you're using compatible versions of acai-ts, TypeScript, and Node.js</p>
+</li>
+</ol>
+<p>For additional support, please check:
+- <a href="https://github.com/syngenta/acai-ts/issues">GitHub Issues</a>
+- <a href="https://www.npmjs.com/package/acai-ts">NPM Package</a>
+- <a href="https://github.com/syngenta/acai-ts-docs/tree/main/examples">Documentation Examples</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.instant", "navigation.indexes", "navigation.tracking", "content.code.annotate"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>

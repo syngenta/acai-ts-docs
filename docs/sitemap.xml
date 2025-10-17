@@ -2,107 +2,117 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/changes/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/demo/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/install/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://syngenta.github.io/acai-ts-docs/troubleshooting/</loc>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/request/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/response/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/endpoint/configurations/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/endpoint/setup/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/router/configurations/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/apigateway/router/setup/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/common/logger/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://syngenta.github.io/acai-ts-docs/decorators/</loc>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/dynamodb/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/dynamodb/configurations/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/dynamodb/record/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/s3/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/s3/configurations/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/s3/record/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/sqs/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/sqs/configurations/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/sqs/record/</loc>
-         <lastmod>2025-10-16</lastmod>
+         <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -7,6 +7,8 @@ nav:
     - Tutorials:
         - demo.md
     - install.md
+    - Decorators:
+        - decorators/index.md
     - Event Handlers:
         - APIGateway:
             - apigateway/index.md
@@ -31,6 +33,7 @@ nav:
             - sqs/configurations.md
             - sqs/record.md
     - common/logger.md
+    - troubleshooting.md
     - changes.md
     - NPM Registry: https://www.npmjs.com/package/acai-ts
     - Github Repository: https://github.com/syngenta/acai-ts

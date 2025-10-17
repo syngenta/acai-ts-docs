@@ -19,7 +19,7 @@ Each endpoint must have stateless functions which match the name of the HTTP met
 ```typescript
 // example for endpoint file: api/grower.ts
 
-import { RequestClient, ResponseClient } from '@syngenta-digital/acai-ts';
+import { RequestClient, ResponseClient } from 'acai-ts';
 
 export const requirements = {}; // discussed in next section below
 
@@ -67,7 +67,7 @@ Each method within the endpoint file can have individual validation requirements
 ```typescript
 // example for endpoint file: api/grower.ts
 
-import { RequestClient, ResponseClient, EndpointRequirements } from '@syngenta-digital/acai-ts';
+import { RequestClient, ResponseClient, EndpointRequirements } from 'acai-ts';
 import { Grower } from 'api/logic/grower';
 import * as db from 'api/logic/database';
 
