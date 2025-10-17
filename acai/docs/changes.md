@@ -3,7 +3,7 @@ title: Migration from acai-js
 description: Migrating from acai-js to acai-ts
 ---
 
-## Migration Guide: acai-js to acai-ts
+# 🔄 Migration Guide: acai-js to acai-ts
 
 Acai-TS is a complete TypeScript rewrite of acai-js with improved type safety, decorator support, and modern ES6+ features. This guide will help you migrate your existing acai-js code to acai-ts.
 
@@ -16,7 +16,7 @@ Acai-TS is a complete TypeScript rewrite of acai-js with improved type safety, d
     4. Add type annotations
     5. Use decorators for cleaner endpoint definitions (optional)
 
-## Installation Changes
+## 📦 Installation Changes
 
 ### Before (acai-js)
 ```bash
@@ -33,7 +33,7 @@ npm install acai-ts reflect-metadata
 - TypeScript >= 5.0
 - `reflect-metadata` package (for decorator support)
 
-## Import Changes
+## 📂 Import Changes
 
 ### Before (acai-js)
 ```javascript
@@ -47,7 +47,7 @@ import { Router, Event } from 'acai-ts';
 import { APIGatewayProxyEvent, DynamoDBStreamEvent } from 'aws-lambda';
 ```
 
-## TypeScript Configuration
+## 🔧 TypeScript Configuration
 
 Add to your `tsconfig.json`:
 
@@ -64,7 +64,7 @@ Add to your `tsconfig.json`:
 }
 ```
 
-## APIGateway Router Changes
+## 🌐 APIGateway Router Changes
 
 ### Before (acai-js)
 ```javascript
@@ -98,7 +98,7 @@ export const handler = async (
 };
 ```
 
-## Endpoint Changes
+## 🎯 Endpoint Changes
 
 ### Pattern-Based (File-Based) Routing
 
@@ -120,41 +120,41 @@ exports.post = async (request, response) => {
 #### After (acai-ts)
 ```typescript
 // users.ts
-import { RequestClient, ResponseClient, EndpointRequirements } from 'acai-ts';
+import { Request, Response } from 'acai-ts';
 
-export const requirements: EndpointRequirements = {
+export const requirements = {
   post: {
     requiredBody: 'CreateUserRequest'
   }
 };
 
 export const post = async (
-  request: RequestClient, 
-  response: ResponseClient
-): Promise<ResponseClient> => {
+  request: Request, 
+  response: Response
+): Promise<Response> => {
   response.body = { id: '123', ...request.body };
   return response;
 };
 ```
 
-### Decorator-Based Routing (NEW in acai-ts!)
+### 🎨 Decorator-Based Routing (NEW in acai-ts!)
 
 ```typescript
-import { Endpoint, Route, Validate, Response, Request } from 'acai-ts';
+// File: src/handlers/users.ts
+import { BaseEndpoint, Validate, Response, Request } from 'acai-ts';
 
-@Route('POST', '/users')
-@Validate('CreateUserRequest')
-export class CreateUserEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+export class UsersEndpoint extends BaseEndpoint {
+  @Validate({ requiredBody: 'CreateUserRequest' })
+  async post(request: Request, response: Response): Promise<Response> {
     response.body = { id: '123', ...request.body };
     return response;
   }
 }
 ```
 
-## Event Handler Changes
+## 🗃️ Event Handler Changes
 
-### DynamoDB Streams
+### 📊 DynamoDB Streams
 
 #### Before (acai-js)
 ```javascript
@@ -187,7 +187,7 @@ export const handler = async (event: DynamoDBStreamEvent): Promise<void> => {
 };
 ```
 
-### S3 Events
+### 🨣 S3 Events
 
 #### Before (acai-js)
 ```javascript
@@ -226,7 +226,7 @@ export const handler = async (event: S3Event): Promise<void> => {
 };
 ```
 
-### SQS Messages
+### 📬 SQS Messages
 
 #### Before (acai-js)
 ```javascript
@@ -255,7 +255,7 @@ export const handler = async (event: SQSEvent): Promise<void> => {
 };
 ```
 
-## Logger Changes
+## 📝 Logger Changes
 
 ### Before (acai-js)
 ```javascript
@@ -271,31 +271,43 @@ Logger.info('message');
 Logger.error('error');
 ```
 
-## New Features in acai-ts
+## ✨ New Features in acai-ts
 
-### 1. Decorator Support
+### 1️⃣ Decorator Support
 Use decorators for cleaner endpoint definitions:
 
 ```typescript
-@Route('POST', '/users')
-@Validate('CreateUserRequest')
-@Before(authMiddleware)
-@After(loggingMiddleware)
-@Timeout(30000)
-export class CreateUserEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+// File: src/handlers/users.ts
+import { BaseEndpoint, Validate, Before, After, Timeout, Request, Response } from 'acai-ts';
+
+const authMiddleware = async (request: Request, response: Response) => {
+  // Auth logic
+};
+
+const loggingMiddleware = async (request: Request, response: Response) => {
+  // Logging logic
+};
+
+export class UsersEndpoint extends BaseEndpoint {
+  @Validate({ requiredBody: 'CreateUserRequest' })
+  @Before(authMiddleware)
+  @After(loggingMiddleware)
+  @Timeout(30000)
+  async post(request: Request, response: Response): Promise<Response> {
     // Clean business logic
+    response.body = { id: '123', ...request.body };
+    return response;
   }
 }
 ```
 
-### 2. Full TypeScript Type Safety
+### 2️⃣ Full TypeScript Type Safety
 All classes, interfaces, and functions are fully typed:
 
 ```typescript
-import { RequestClient, ResponseClient } from 'acai-ts';
+import { Request, Response } from 'acai-ts';
 
-const request: RequestClient = {
+const request: Request = {
   path: '/users',
   method: 'POST',
   body: { email: 'user@example.com' },
@@ -305,7 +317,7 @@ const request: RequestClient = {
 };
 ```
 
-### 3. Custom Data Classes with Types
+### 3️⃣ Custom Data Classes with Types
 ```typescript
 interface UserData {
   id: string;
@@ -336,14 +348,14 @@ for (const user of dynamodb.records) {
 }
 ```
 
-### 4. Improved Error Handling
+### 4️⃣ Improved Error Handling
 ```typescript
 import { ApiError } from 'acai-ts';
 
 throw new ApiError('User not found', 404, 'user_id');
 ```
 
-## API Compatibility
+## 🔁 API Compatibility
 
 Most APIs remain compatible, but with added type safety:
 
@@ -355,7 +367,7 @@ Most APIs remain compatible, but with added type safety:
 | `Response` | `ResponseClient` / `Response` | Typed interface |
 | `global.logger` | `Logger` | Import from package |
 
-## Breaking Changes
+## ⚠️ Breaking Changes
 
 ### 1. Package Name
 - **Old**: `acai-js` or `@syngenta-digital/Acai`
@@ -377,7 +389,7 @@ Most APIs remain compatible, but with added type safety:
 - **Old**: `require()`
 - **New**: `import` statements
 
-## Migration Checklist
+## ✅ Migration Checklist
 
 - [ ] Install `acai-ts` and `reflect-metadata`
 - [ ] Update `tsconfig.json` with decorator support
@@ -391,7 +403,7 @@ Most APIs remain compatible, but with added type safety:
 - [ ] Test all endpoints and event handlers
 - [ ] Update deployment configuration for TypeScript build
 
-## Need Help?
+## 🆘 Need Help?
 
 - [GitHub Issues](https://github.com/syngenta/acai-ts/issues)
 - [Examples Repository](https://github.com/syngenta/acai-ts-docs/tree/main/examples)

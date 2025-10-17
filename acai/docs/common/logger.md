@@ -5,9 +5,9 @@ description: How to use the Acai-TS Logger
 
 The Acai-TS logger automatically logs in a formatted JSON string for easy reading and searching with AWS CloudWatch. A developer can then use [AWS filter patterns](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html) making it effortless to find the exact log they are looking for. Below is an example of how to use the logger:
 
-## Examples
+## 📚 Examples
 
-### Basic Usage
+### 🚀 Basic Usage
 
 ```typescript
 import { Logger } from 'acai-ts';
@@ -28,7 +28,7 @@ Logger.error('testing error');
 }
 ```
 
-### Advanced Usage
+### 🔧 Advanced Usage
 
 ```typescript
 import { Logger } from 'acai-ts';
@@ -45,7 +45,7 @@ Logger.log({ level: 'INFO', log: { someKey: 'testing info' } });
 }
 ```
 
-### Global Logger Setup
+### 🌍 Global Logger Setup
 
 ```typescript
 import { Logger } from 'acai-ts';
@@ -62,7 +62,7 @@ Logger.setUpGlobal(true, {
 Logger.info('Application started');
 ```
 
-### TypeScript Types
+### 📝 TypeScript Types
 
 ```typescript
 import { Logger } from 'acai-ts';
@@ -79,7 +79,7 @@ const level: LogLevel = 'INFO';
 Logger.log({ level, log: { data: 'value' } });
 ```
 
-## Configuration Options
+## ⚙️ Configuration Options
 
 The logger can be configured when setting up your Event handlers or Router:
 

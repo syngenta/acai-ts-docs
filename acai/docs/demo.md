@@ -2,9 +2,9 @@
 title: Demo
 description: Demo & Explanation of Acai-TS
 ---
-# Demo & Explanation of Acai-TS
+# 🎪 Demo & Explanation of Acai-TS
 
-## Examples Repository
+## 📚 Examples Repository
 
 Don't like reading documentation? Check out our working examples:
 
@@ -17,24 +17,24 @@ Don't like reading documentation? Check out our working examples:
     * **S3 Events** - Process S3 bucket events
     * **SQS Messages** - Process SQS queue messages
 
-## Quick Start Tutorial
+## 🚀 Quick Start Tutorial
 
-### 1. Install Acai-TS
+### 1️⃣ Install Acai-TS
 
 ```bash
 npm install acai-ts reflect-metadata
 ```
 
-### 2. Create Your First Endpoint
+### 2️⃣ Create Your First Endpoint
 
 ```typescript
 import 'reflect-metadata';
-import { Router, Endpoint, Route, Response, Request } from 'acai-ts';
+import { Router, BaseEndpoint, Response, Request } from 'acai-ts';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
-@Route('GET', '/hello')
-export class HelloEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+// File: src/handlers/hello.ts
+export class HelloEndpoint extends BaseEndpoint {
+  async get(request: Request, response: Response): Promise<Response> {
     response.body = { message: 'Hello, World!' };
     return response;
   }
@@ -45,20 +45,22 @@ export const handler = async (
 ): Promise<APIGatewayProxyResult> => {
   const router = new Router({
     basePath: '/api/v1',
-    endpoints: [HelloEndpoint]
+    routesPath: './src/handlers/**/*.ts'
   });
 
   return await router.route(event);
 };
 ```
 
-### 3. Add Schema Validation
+### 3️⃣ Add Schema Validation
 
 ```typescript
-@Route('POST', '/users')
-@Validate('CreateUserRequest')
-export class CreateUserEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+// File: src/handlers/users.ts
+import { BaseEndpoint, Validate, Response, Request } from 'acai-ts';
+
+export class UsersEndpoint extends BaseEndpoint {
+  @Validate({ requiredBody: 'CreateUserRequest' })
+  async post(request: Request, response: Response): Promise<Response> {
     // request.body is already validated against your OpenAPI schema
     response.body = { 
       id: '123',
@@ -69,28 +71,31 @@ export class CreateUserEndpoint extends Endpoint {
 }
 ```
 
-### 4. Add Middleware
+### 4️⃣ Add Middleware
 
 ```typescript
-const authMiddleware = async (request: Request) => {
+// File: src/handlers/profile.ts
+import { BaseEndpoint, Before, Response, Request } from 'acai-ts';
+
+const authMiddleware = async (request: Request, response: Response) => {
   if (!request.headers.authorization) {
-    throw new ApiError('Unauthorized', 401);
+    response.code = 401;
+    response.setError('auth', 'Unauthorized');
   }
 };
 
-@Route('GET', '/profile')
-@Before(authMiddleware)
-export class ProfileEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+export class ProfileEndpoint extends BaseEndpoint {
+  @Before(authMiddleware)
+  async get(request: Request, response: Response): Promise<Response> {
     response.body = { user: 'profile data' };
     return response;
   }
 }
 ```
 
-## Key Concepts
+## 💡 Key Concepts
 
-### Happy Path Programming
+### 🎆 Happy Path Programming
 
 Acai-TS embraces **Happy Path Programming** - validation happens upfront, so your business logic runs cleanly:
 
@@ -108,10 +113,9 @@ export const handler = async (event: any) => {
 };
 
 // ✅ With Acai-TS: Validation handled, focus on logic
-@Route('POST', '/users')
-@Validate('CreateUserRequest')
-export class CreateUserEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+export class CreateUserEndpoint extends BaseEndpoint {
+  @Validate({ requiredBody: 'CreateUserRequest' })
+  async post(request: Request, response: Response): Promise<Response> {
     // Body is already validated - just write business logic!
     const user = await this.userService.create(request.body);
     response.body = user;
@@ -120,7 +124,7 @@ export class CreateUserEndpoint extends Endpoint {
 }
 ```
 
-### TypeScript First
+### 📘 TypeScript First
 
 Full type safety throughout:
 
@@ -131,9 +135,9 @@ interface User {
   name: string;
 }
 
-@Route('GET', '/users/{id}')
-export class GetUserEndpoint extends Endpoint {
-  async handler(request: Request, response: Response) {
+// File: src/handlers/users/{id}.ts
+export class UserEndpoint extends BaseEndpoint {
+  async get(request: Request, response: Response): Promise<Response> {
     const userId: string = request.pathParameters.id;
     const user: User = await this.userRepo.findById(userId);
     
@@ -143,7 +147,7 @@ export class GetUserEndpoint extends Endpoint {
 }
 ```
 
-## Next Steps
+## 📍 Next Steps
 
 * [APIGateway Documentation](apigateway/index.md) - Learn about routing, decorators, and request/response handling
 * [DynamoDB Events](dynamodb/index.md) - Process DynamoDB stream events

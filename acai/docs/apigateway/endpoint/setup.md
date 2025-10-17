@@ -5,51 +5,54 @@ description: How to set up an endpoint for the Acai
 
 # Endpoint Set Up
 
-Each endpoint is meant to be treated as a separate module within the API. These endpoints are not meant to be extended or commingled and thus should approach individually. If resources are meant to be shared across endpoints, then those resources should be packaged as shared classes or utilities.
+Acai-TS supports two patterns for defining endpoints: **functional pattern** (using exported functions with requirements) and **decorator pattern** (using classes with method decorators). Both approaches follow the "Happy Path Programming" philosophy where validation happens upfront, ensuring your business logic runs cleanly without defensive coding.
 
-Each endpoint should read as a procedural list of steps to be completed. To help keep this list clean and easy to read, the Acai follows its philosophy of "Happy Path Programming." To achieve this, the Acai comes with a plethora of validation configurations with the ability to extend with even more customized validation options. This ensures the request sent to your endpoint will be correct with little need for exception handling or complex conditionals.
+???+ tip "Choose Your Pattern"
+    - **Functional Pattern**: Best for explicit configuration objects and JavaScript/TypeScript mixed codebases
+    - **Decorator Pattern**: Best for TypeScript-first development with declarative annotations
 
 ???+ examples
     Don't like reading documentation? Then look at [our examples,](https://github.com/syngenta/acai-ts-docs/blob/main/examples/apigateway) which can run locally!
 
+## Functional Pattern
+
 ### 1. Match Function to HTTP Method
 
-Each endpoint must have stateless functions which match the name of the HTTP method. If endpoint is called the a `POST` HTTP method, then the `post` endpoint function is invoked.
+Each endpoint file exports functions matching HTTP method names. When an endpoint receives a `POST` request, the `post` function is invoked.
 
 ```typescript
-// example for endpoint file: api/grower.ts
-
-import { RequestClient, ResponseClient } from 'acai-ts';
+// File: src/handlers/grower.ts
+import { Request, Response } from 'acai-ts';
 
 export const requirements = {}; // discussed in next section below
 
-export const post = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[POST] /grower was called'};
+export const post = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[POST] /grower was called' };
     return response;
 };
 
-export const get = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[GET] /grower was called'};
+export const get = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[GET] /grower was called' };
     return response;
 };
 
-export const patch = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[PATCH] /grower was called'};
+export const patch = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[PATCH] /grower was called' };
     return response;
 };
 
-export const put = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[PUT] /grower was called'};
+export const put = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[PUT] /grower was called' };
     return response;
 };
 
-export const deleteMethod = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[DELETE] /grower was called'};
+export const delete = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[DELETE] /grower was called' };
     return response;
 };
 
-export const query = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[QUERY] /grower, a custom http method, was called'};
+export const query = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[QUERY] /grower, a custom http method, was called' };
     return response;
 };
 ```
@@ -65,85 +68,240 @@ Each method within the endpoint file can have individual validation requirements
     If you are already using an `openapi.yml`, none of these requirements below are necessary. Ensure your `router` has enabled [`autoValidate`]({{web.url}}/node/apigateway/router/configurations/#example-router-config-with-directory-routing) with proper `schemaPath` configured and the below requirements are not necessary for any basic structural validation (headers, body, query, params will be checked via openapi.yml). You can still use `before`, `after` & `dataClass` with other custom validations for more advanced use cases.
 
 ```typescript
-// example for endpoint file: api/grower.ts
+// File: src/handlers/grower.ts
+import { Request, Response } from 'acai-ts';
+import { Grower } from './logic/grower';
+import * as db from './logic/database';
 
-import { RequestClient, ResponseClient, EndpointRequirements } from 'acai-ts';
-import { Grower } from 'api/logic/grower';
-import * as db from 'api/logic/database';
-
-export const requirements: EndpointRequirements = {
-    post: {
-        requiredHeaders: ['x-onbehalf-of'],
-        availableHeaders: ['x-requester-id', 'x-test-id'], //not advisable to use; too strict
-        requiredBody: 'post-grower-request'
-    },
-    get: {
-        requiredQuery: ['requester_id'],
-        availableQuery: ['grower_email', 'grower_phone', 'grower_first', 'grower_last'],
-    },
-    put: {
-        requiredPath: 'grower/{id}',
-        requiredAuth: true,
-        requiredBody: 'put-grower-request',
-        dataClass: Grower,
-        timeout: 1500, // will override timeout value set in router config
-    },
-    patch: {
-        requiredPath: 'grower/{id}',
-        requiredAuth: true,
-        requiredBody: 'patch-grower-request',
-        before: async (request: RequestClient, response: ResponseClient, requirements: any): Promise<void> => {
-            // might be cleaner to put this in a separate file and call in context.
-            const result = await db.checkGrowerIdExists(request.pathParams.id);
-            if (!result){
-                response.setError('grower/{id}', `grower with id: ${request.pathParams.id} does not exist.`);
-            }
-        }
-    },
-    delete: {
-        requiredPath: 'grower/{id}',
-        after: async (request: RequestClient, response: ResponseClient, requirements: any): Promise<ResponseClient> => {
-            // might be cleaner to put this in a separate file and call in context.
-            const relations = await db.getRequesterRelations(request.headers['x-requester-id']);
-            const results: any[] = []
-            for (const grower of response.rawBody){
-                if (relations.includes(grower.id)){
-                    results.push(grower);
-                }
-            }
-            response.body = results;
-            return response;
-        }
+// Middleware functions
+const checkGrowerExists = async (request: Request, response: Response): Promise<void> => {
+    const result = await db.checkGrowerIdExists(request.pathParameters.id);
+    if (!result) {
+        response.code = 404;
+        response.setError('grower', `grower with id: ${request.pathParameters.id} does not exist.`);
     }
 };
 
-export const post = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[POST] /grower was called'};
+const filterByRelations = async (request: Request, response: Response): Promise<void> => {
+    const relations = await db.getRequesterRelations(request.headers['x-requester-id']);
+    const results: any[] = [];
+    for (const grower of response.body) {
+        if (relations.includes(grower.id)) {
+            results.push(grower);
+        }
+    }
+    response.body = results;
+};
+
+export const requirements = {
+    post: {
+        requiredHeaders: ['x-onbehalf-of'],
+        requiredBody: 'post-grower-request'
+    },
+    get: {
+        requiredQuery: ['requester_id']
+    },
+    put: {
+        auth: true,
+        requiredBody: 'put-grower-request',
+        timeout: 1500 // will override timeout value set in router config
+    },
+    patch: {
+        auth: true,
+        requiredBody: 'patch-grower-request',
+        before: [checkGrowerExists]
+    },
+    delete: {
+        after: [filterByRelations]
+    }
+};
+
+export const post = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[POST] /grower was called' };
     return response;
 };
 
-export const get = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[GET] /grower was called'};
+export const get = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[GET] /grower was called' };
     return response;
 };
 
-export const patch = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[PATCH] /grower was called'};
+export const patch = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[PATCH] /grower was called' };
     return response;
 };
 
-export const put = async (grower: Grower, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[PUT] /grower was called; got instance of grower instead of request'};
+export const put = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[PUT] /grower was called' };
     return response;
 };
 
-export const deleteMethod = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[DELETE] /grower was called'};
+export const delete = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[DELETE] /grower was called' };
     return response;
 };
 
-export const query = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {message: '[QUERY] /grower, a custom http method, was called'};
+export const query = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { message: '[QUERY] /grower, a custom http method, was called' };
     return response;
 };
 ```
+
+---
+
+## Decorator Pattern
+
+### 1. Create Class Extending BaseEndpoint
+
+The decorator pattern uses classes that extend `BaseEndpoint` with method decorators for configuration.
+
+```typescript
+// File: src/handlers/grower.ts
+import 'reflect-metadata';
+import { BaseEndpoint, Request, Response } from 'acai-ts';
+
+export class GrowerEndpoint extends BaseEndpoint {
+    async post(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[POST] /grower was called' };
+        return response;
+    }
+
+    async get(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[GET] /grower was called' };
+        return response;
+    }
+
+    async patch(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[PATCH] /grower was called' };
+        return response;
+    }
+
+    async put(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[PUT] /grower was called' };
+        return response;
+    }
+
+    async delete(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[DELETE] /grower was called' };
+        return response;
+    }
+
+    async query(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[QUERY] /grower, a custom http method, was called' };
+        return response;
+    }
+}
+```
+
+### 2. Add Method Decorators (optional)
+
+Use decorators to configure validation, authentication, middleware, and timeouts for each HTTP method.
+
+```typescript
+// File: src/handlers/grower.ts
+import 'reflect-metadata';
+import { BaseEndpoint, Validate, Auth, Before, After, Timeout, Request, Response } from 'acai-ts';
+import { Grower } from './logic/grower';
+import * as db from './logic/database';
+
+// Middleware functions
+const checkGrowerExists = async (request: Request, response: Response): Promise<void> => {
+    const result = await db.checkGrowerIdExists(request.pathParameters.id);
+    if (!result) {
+        response.code = 404;
+        response.setError('grower', `grower with id: ${request.pathParameters.id} does not exist.`);
+    }
+};
+
+const filterByRelations = async (request: Request, response: Response): Promise<void> => {
+    const relations = await db.getRequesterRelations(request.headers['x-requester-id']);
+    const results: any[] = [];
+    for (const grower of response.body) {
+        if (relations.includes(grower.id)) {
+            results.push(grower);
+        }
+    }
+    response.body = results;
+};
+
+const logRequest = async (request: Request, response: Response): Promise<void> => {
+    console.log(`${request.method} ${request.path} - ${new Date().toISOString()}`);
+};
+
+export class GrowerEndpoint extends BaseEndpoint {
+    @Validate({ requiredHeaders: ['x-onbehalf-of'], requiredBody: 'post-grower-request' })
+    @Before(logRequest)
+    async post(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[POST] /grower was called' };
+        return response;
+    }
+
+    @Validate({ requiredQuery: ['requester_id'] })
+    @Before(logRequest)
+    async get(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[GET] /grower was called' };
+        return response;
+    }
+
+    @Auth()
+    @Validate({ requiredBody: 'patch-grower-request' })
+    @Before(checkGrowerExists)
+    @Before(logRequest)
+    async patch(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[PATCH] /grower was called' };
+        return response;
+    }
+
+    @Auth()
+    @Validate({ requiredBody: 'put-grower-request' })
+    @Before(logRequest)
+    @Timeout(1500)
+    async put(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[PUT] /grower was called' };
+        return response;
+    }
+
+    @Before(logRequest)
+    @After(filterByRelations)
+    async delete(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[DELETE] /grower was called' };
+        return response;
+    }
+
+    async query(request: Request, response: Response): Promise<Response> {
+        response.body = { message: '[QUERY] /grower, a custom http method, was called' };
+        return response;
+    }
+}
+```
+
+### Available Decorators
+
+| Decorator | Purpose | Example |
+|-----------|---------|----------|
+| `@Validate()` | Request validation | `@Validate({ requiredBody: 'UserSchema' })` |
+| `@Auth()` | Authentication required | `@Auth()` or `@Auth(false)` |
+| `@Before()` | Pre-processing middleware | `@Before(authMiddleware, loggingMiddleware)` |
+| `@After()` | Post-processing middleware | `@After(loggingMiddleware)` |
+| `@Timeout()` | Method timeout | `@Timeout(5000)` |
+
+### Decorator Execution Order
+
+1. `@Before` middleware (runs first)
+2. `@Auth` authentication (router's `withAuth` middleware)
+3. `@Validate` validation
+4. HTTP method with `@Timeout`
+5. `@After` middleware (runs last)
+
+---
+
+## Pattern Comparison
+
+| Feature | Functional Pattern | Decorator Pattern |
+|---------|-------------------|-------------------|
+| **Configuration** | `requirements` object | Method decorators |
+| **TypeScript Required** | No | Yes |
+| **File Structure** | Export functions | Export class |
+| **Middleware** | Arrays in requirements | Multiple decorators |
+| **Reusability** | High (shared requirements) | Moderate |
+| **Co-location** | Separate from methods | Inline with methods |

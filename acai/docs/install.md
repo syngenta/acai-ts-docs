@@ -3,30 +3,34 @@ title: Install
 description: Install Acai-TS
 ---
 
-## Requirements
+# 📦 Installation
+
+## ⚡ Requirements
 
 * Node.js 18.18.2 or higher; [download and install Node.js](https://nodejs.org/en/download/)
 * TypeScript 5.0 or higher
 * Access to public [npm registry](https://www.npmjs.com/)
 
 
-## Installation
+## 🚀 Installation
 === "npm"
 ```bash
-npm install acai-ts reflect-metadata
+npm install acai-ts
 ```
 
 === "yarn"
 ```bash
-yarn add acai-ts reflect-metadata
+yarn add acai-ts
 ```
 
 === "pnpm"
 ```bash
-pnpm add acai-ts reflect-metadata
+pnpm add acai-ts
 ```
 
-## TypeScript Configuration
+> **Note**: `reflect-metadata` is automatically installed as a dependency of `acai-ts`.
+
+## 🔧 TypeScript Configuration
 
 Acai-TS requires the following TypeScript compiler options in your `tsconfig.json`:
 
@@ -43,18 +47,20 @@ Acai-TS requires the following TypeScript compiler options in your `tsconfig.jso
 }
 ```
 
-## Import Reflect Metadata
+## 📋 Import Reflect Metadata
 
-You must import `reflect-metadata` at the entry point of your application:
+You must import `reflect-metadata` at the entry point of your application when using decorators:
 
 ```typescript
 import 'reflect-metadata';
-import { Router, Endpoint } from 'acai-ts';
+import { Router, BaseEndpoint } from 'acai-ts';
 
 // Your code here...
 ```
 
-## Verify Installation
+> **Important**: While `reflect-metadata` is automatically installed with `acai-ts`, you still need to explicitly import it in your code for decorator support to work.
+
+## ✅ Verify Installation
 
 Create a simple test file to verify the installation:
 

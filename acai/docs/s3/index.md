@@ -5,7 +5,7 @@ description: Use Acai with S3 Events
 
 Event handler for Amazon S3 Bucket Events.
 
-## Features
+## ✨ Features
 
 * Automatically convert JSON files to JSON objects
 * Automatically convert CSV files to JSON objects

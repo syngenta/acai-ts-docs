@@ -3,14 +3,16 @@ site_url: https://syngenta.github.io/acai-ts-docs
 site_author: Paul Cruse III
 site_dir: ../docs
 nav:
-    - Home: index.md
-    - Tutorials:
+    - 🏠 Home: index.md
+    - 📦 Install: install.md
+    - 🎓 Tutorials:
         - demo.md
-    - install.md
-    - Decorators:
-        - decorators/index.md
-    - Event Handlers:
-        - APIGateway:
+    - 📖 Usage:
+        - usage/index.md
+        - usage/functional.md
+        - usage/decorators.md
+    - ⚡ Event Handlers:
+        - 🌐 APIGateway:
             - apigateway/index.md
             - Router:
                 - apigateway/router/setup.md
@@ -20,21 +22,21 @@ nav:
                 - apigateway/endpoint/configurations.md
             - apigateway/request.md
             - apigateway/response.md
-        - DynamoDB:
+        - 📊 DynamoDB:
             - dynamodb/index.md
             - dynamodb/configurations.md
             - dynamodb/record.md
-        - S3:
+        - 🪣 S3:
             - s3/index.md
             - s3/configurations.md
             - s3/record.md
-        - SQS:
+        - 📬 SQS:
             - sqs/index.md
             - sqs/configurations.md
             - sqs/record.md
-    - common/logger.md
-    - troubleshooting.md
-    - changes.md
+    - 📝 Logger: common/logger.md
+    - 🔍 Troubleshooting: troubleshooting.md
+    - 🔄 Migration Guide: changes.md
     - NPM Registry: https://www.npmjs.com/package/acai-ts
     - Github Repository: https://github.com/syngenta/acai-ts
     - Issues: https://github.com/syngenta/acai-ts/issues

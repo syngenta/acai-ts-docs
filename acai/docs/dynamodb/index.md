@@ -5,7 +5,7 @@ description: Use Acai with DynamoDB Events
 
 Event handler for Amazon DynamoDB Stream Events.
 
-## Features
+## ✨ Features
 
 * Automatically convert DynamoDB JSON to standard JSON
 * Only run on certain DynamoDB operations, like on when items are created, updated or deleted

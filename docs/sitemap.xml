@@ -66,11 +66,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://syngenta.github.io/acai-ts-docs/decorators/</loc>
-         <lastmod>2025-10-17</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://syngenta.github.io/acai-ts-docs/dynamodb/</loc>
          <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
@@ -112,6 +107,21 @@
     </url>
     <url>
          <loc>https://syngenta.github.io/acai-ts-docs/sqs/record/</loc>
+         <lastmod>2025-10-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://syngenta.github.io/acai-ts-docs/usage/</loc>
+         <lastmod>2025-10-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://syngenta.github.io/acai-ts-docs/usage/decorators/</loc>
+         <lastmod>2025-10-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://syngenta.github.io/acai-ts-docs/usage/functional/</loc>
          <lastmod>2025-10-17</lastmod>
          <changefreq>daily</changefreq>
     </url>

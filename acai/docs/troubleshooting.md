@@ -3,13 +3,13 @@ title: Troubleshooting
 description: Common issues and solutions for acai-ts
 ---
 
-# Troubleshooting
+# 🔍 Troubleshooting
 
 This guide covers common issues you may encounter when using acai-ts and their solutions.
 
-## Route Resolution Issues
+## 🛣️ Route Resolution Issues
 
-### routePath Differences Between Development and Build
+### 🏭 routePath Differences Between Development and Build
 
 **Problem:** Routes work in development but fail in production builds, or vice versa.
 
@@ -25,7 +25,7 @@ This guide covers common issues you may encounter when using acai-ts and their s
 
 **Solutions:**
 
-#### 1. Use Absolute Paths in Router Configuration
+#### 1️⃣ Use Absolute Paths in Router Configuration
 ```typescript
 // ❌ Problematic - relative paths
 const router = new Router({
@@ -40,7 +40,7 @@ const router = new Router({
 });
 ```
 
-#### 2. Verify Build Output Structure
+#### 2️⃣ Verify Build Output Structure
 Check that your build process preserves the expected file structure:
 
 ```bash
@@ -51,7 +51,7 @@ find dist -name "*.js" -type f | head -10
 ls -la dist/api/handlers/
 ```
 
-#### 3. Use Explicit Route Lists for Production
+#### 3️⃣ Use Explicit Route Lists for Production
 For maximum reliability in production:
 
 ```typescript
@@ -65,7 +65,7 @@ const router = new Router({
 });
 ```
 
-#### 4. Environment-Specific Configuration
+#### 4️⃣ Environment-Specific Configuration
 ```typescript
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -78,7 +78,7 @@ const router = new Router({
 });
 ```
 
-#### 5. Debug Route Discovery
+#### 5️⃣ Debug Route Discovery
 Enable logging to see which routes are being discovered:
 
 ```typescript
@@ -94,9 +94,9 @@ router.autoLoad();
 console.log('Discovered routes:', router.getRoutes?.());
 ```
 
-## Decorator Issues
+## 🎨 Decorator Issues
 
-### Reflect Metadata Not Found
+### 🪞 Reflect Metadata Not Found
 
 **Problem:** `Cannot read property 'getMetadata' of undefined` or similar metadata errors.
 
@@ -109,7 +109,7 @@ import { Route, Validate } from 'acai-ts';
 // Rest of your code...
 ```
 
-### TypeScript Configuration Issues
+### 🔧 TypeScript Configuration Issues
 
 **Problem:** Decorators not working or compiler errors.
 
@@ -130,7 +130,7 @@ import { Route, Validate } from 'acai-ts';
 }
 ```
 
-### Decorator Order Issues
+### 🔢 Decorator Order Issues
 
 **Problem:** Middleware not executing in expected order.
 
@@ -151,13 +151,13 @@ export class UserController {
 }
 ```
 
-### Method Not Found Errors
+### ❌ Method Not Found Errors
 
 **Problem:** `Method not found` or handler not being called.
 
 **Common Causes & Solutions:**
 
-#### 1. Method Name Mismatch
+#### 1️⃣ Method Name Mismatch
 ```typescript
 // ❌ Wrong - method name doesn't match decorator
 @Route('POST', '/users')
@@ -171,7 +171,7 @@ async createUser() {}
 async getUser() {}
 ```
 
-#### 2. Missing Export
+#### 2️⃣ Missing Export
 ```typescript
 // ❌ Wrong - not exported
 @Route('GET', '/users')
@@ -184,7 +184,7 @@ export class UserController {
 }
 ```
 
-#### 3. Router Not Recognizing Decorated Routes
+#### 3️⃣ Router Not Recognizing Decorated Routes
 ```typescript
 // Make sure your router is configured correctly for decorators
 const router = new Router({
@@ -197,9 +197,9 @@ const router = new Router({
 import './controllers/UserController'; // This registers the decorated routes
 ```
 
-## Validation Issues
+## ✓ Validation Issues
 
-### Schema Validation Failures
+### 🚨 Schema Validation Failures
 
 **Problem:** Valid requests are being rejected or invalid requests are passing.
 
@@ -247,7 +247,7 @@ const result = validator.validate(data, schema);
 console.log('Validation result:', result);
 ```
 
-### OpenAPI Validation Issues
+### 📄 OpenAPI Validation Issues
 
 **Problem:** Router with `autoValidate: true` not working correctly.
 
@@ -267,9 +267,9 @@ Verify your OpenAPI schema:
 - HTTP methods are correctly defined
 - Request/response schemas are valid JSON Schema
 
-## Performance Issues
+## ⚡ Performance Issues
 
-### Slow Route Resolution
+### 🐢 Slow Route Resolution
 
 **Problem:** First request takes a long time or timeouts occur.
 
@@ -305,7 +305,7 @@ const router = new Router({
 });
 ```
 
-### Memory Issues with Large Applications
+### 💾 Memory Issues with Large Applications
 
 **Problem:** High memory usage or out-of-memory errors.
 
@@ -343,9 +343,9 @@ async processData() {
 }
 ```
 
-## Authentication Issues
+## 🔐 Authentication Issues
 
-### @Auth Not Blocking Requests
+### 🚨 @Auth Not Blocking Requests
 
 **Problem:** Authentication decorator allows unauthorized requests through.
 
@@ -394,9 +394,9 @@ async processData() {
 })
 ```
 
-## Build and Deployment Issues
+## 🚀 Build and Deployment Issues
 
-### Routes Not Found After Deployment
+### 🔄 Routes Not Found After Deployment
 
 **Problem:** Routes work locally but return 404 in deployed environment.
 
@@ -432,7 +432,7 @@ const router = new Router({
 });
 ```
 
-### Timeout Issues
+### ⏰ Timeout Issues
 
 **Problem:** Functions timing out unexpectedly.
 
@@ -460,7 +460,7 @@ const router = new Router({
 })
 ```
 
-## Getting Help
+## 🆘 Getting Help
 
 If you continue to experience issues:
 

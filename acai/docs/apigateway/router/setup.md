@@ -175,43 +175,195 @@ There are three routing modes: `directory`, `pattern` and `list`; `directory` an
     };
     ```
 
+#### Routing Mode: File-Based with Decorators
+
+???+ tip
+    This is the modern TypeScript approach using class-based endpoints with decorators. Perfect for type-safe development with clean, declarative configuration.
+
+=== "file structure"
+
+    ```
+    ~~ File Structure ~~                    ~~ Route ~~
+    ===================================================================
+    =src/
+    ├──handlers/
+    │   ├──router.ts                        |
+    │   ├──users.ts                         | /users (GET, POST, PUT, DELETE)
+    │   ├──users/{id}.ts                    | /users/{id} (GET, PUT, DELETE)
+    │   ├──products/
+    │   │   ├──index.ts                     | /products
+    │   │   └──{id}/reviews.ts              | /products/{id}/reviews
+    │   └──health.ts                        | /health
+    ```
+
+=== "router.ts"
+
+    ```typescript
+    import 'reflect-metadata';
+    import { Router } from 'acai-ts';
+    import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+
+    export const handler = async (
+      event: APIGatewayProxyEvent
+    ): Promise<APIGatewayProxyResult> => {
+      const router = new Router({
+        basePath: '/api/v1',
+        routesPath: './src/handlers/**/*.ts',
+        schemaPath: './openapi.yml',
+        withAuth: async (request, response) => {
+          // Global auth middleware
+          const token = request.headers.authorization?.replace('Bearer ', '');
+          if (!token || !validateJWT(token)) {
+            response.code = 401;
+            response.setError('auth', 'Invalid token');
+          }
+        }
+      });
+      
+      return await router.route(event);
+    };
+    ```
+
+=== "users.ts (endpoint)"
+
+    ```typescript
+    import 'reflect-metadata';
+    import { BaseEndpoint, Validate, Auth, Before, After, Timeout, Request, Response } from 'acai-ts';
+
+    const logRequest = async (request: Request, response: Response) => {
+      console.log(`${request.method} ${request.path}`);
+    };
+
+    const addTimestamp = async (request: Request, response: Response) => {
+      if (typeof response.body === 'object') {
+        response.body.timestamp = new Date().toISOString();
+      }
+    };
+
+    export class UsersEndpoint extends BaseEndpoint {
+      @Before(logRequest)
+      @After(addTimestamp)
+      async get(request: Request, response: Response): Promise<Response> {
+        response.body = { users: [] };
+        return response;
+      }
+
+      @Auth()
+      @Validate({ requiredBody: 'CreateUserRequest' })
+      @Before(logRequest)
+      @After(addTimestamp)
+      @Timeout(5000)
+      async post(request: Request, response: Response): Promise<Response> {
+        const user = await createUser(request.body);
+        response.code = 201;
+        response.body = user;
+        return response;
+      }
+
+      @Auth()
+      @Validate({ requiredBody: 'UpdateUserRequest' })
+      async put(request: Request, response: Response): Promise<Response> {
+        const user = await updateUser(request.body);
+        response.body = user;
+        return response;
+      }
+
+      @Auth()
+      async delete(request: Request, response: Response): Promise<Response> {
+        await deleteUser(request.pathParameters.id);
+        response.code = 204;
+        return response;
+      }
+    }
+    ```
+
 
 ### 3. Configure the Endpoint File
 
 Every endpoint file should contain a function which matches an [HTTP method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) in lower case. Most common are `post`, `get`, `put`, `patch`, `delete`, but this library does support custom methods, if you so choose. As long as the method of the request matches the function name, it will work.
 
+**Functional Pattern (requirements object):**
 ```typescript
-import { RequestClient, ResponseClient } from 'acai-ts';
+import { Request, Response } from 'acai-ts';
 
-export const post = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {post: true};
+export const requirements = {
+    post: {
+        requiredBody: 'CreateItemRequest'
+    },
+    get: {
+        requiredHeaders: ['authorization']
+    }
+};
+
+export const post = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { post: true };
     return response;
 };
 
-export const get = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {get: true};
+export const get = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { get: true };
     return response;
 };
 
-export const patch = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {patch: true};
+export const patch = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { patch: true };
     return response;
 };
 
-export const put = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {put: true};
+export const put = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { put: true };
     return response;
 };
 
-export const deleteMethod = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = {delete: true};
+export const delete = async (request: Request, response: Response): Promise<Response> => {
+    response.body = { delete: true };
     return response;
 };
 
 // this is a non-compliant, custom http method; this will work.
-export const query = async (request: RequestClient, response: ResponseClient): Promise<ResponseClient> => {
-    response.body = [{query: true}];
+export const query = async (request: Request, response: Response): Promise<Response> => {
+    response.body = [{ query: true }];
     return response;
 };
+```
+
+**Decorator Pattern (class-based):**
+```typescript
+import { BaseEndpoint, Validate, Auth, Request, Response } from 'acai-ts';
+
+export class ItemEndpoint extends BaseEndpoint {
+    @Validate({ requiredBody: 'CreateItemRequest' })
+    async post(request: Request, response: Response): Promise<Response> {
+        response.body = { post: true };
+        return response;
+    }
+
+    @Auth()
+    async get(request: Request, response: Response): Promise<Response> {
+        response.body = { get: true };
+        return response;
+    }
+
+    async patch(request: Request, response: Response): Promise<Response> {
+        response.body = { patch: true };
+        return response;
+    }
+
+    async put(request: Request, response: Response): Promise<Response> {
+        response.body = { put: true };
+        return response;
+    }
+
+    async delete(request: Request, response: Response): Promise<Response> {
+        response.body = { delete: true };
+        return response;
+    }
+
+    // this is a non-compliant, custom http method; this will work.
+    async query(request: Request, response: Response): Promise<Response> {
+        response.body = [{ query: true }];
+        return response;
+    }
+}
 ```
 
